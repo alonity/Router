@@ -18,7 +18,7 @@
 
 namespace alonity\router;
 
-class Request implements RequestInterface {
+class RequestInheritance implements RequestInterface {
 
 	private $headers;
 
@@ -30,7 +30,7 @@ class Request implements RequestInterface {
 		}
 
 		if(!function_exists('getallheaders')){
-			function getallheaders(){
+			function getallheaders() : array {
 				$headers = [];
 
 				foreach($_SERVER as $name => $value){
@@ -69,7 +69,7 @@ class Request implements RequestInterface {
 	}
 
 	public function getParam(string $key) {
-		return isset($this->params[$key]) ? $this->params[$key] : null;
+		return $this->params[$key] ?? null;
 	}
 
 	public function getMethod() : string {

@@ -18,7 +18,7 @@
 
 namespace alonity\router;
 
-class Response implements ResponseInterface {
+class ResponseInheritance implements ResponseInterface {
 
 	private $code = 200;
 

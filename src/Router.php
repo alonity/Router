@@ -38,9 +38,9 @@ class Router {
 	];
 
 	public function __construct(?RequestInterface $request = null, ?ResponseInterface $response = null){
-		$this->request = is_null($request) ? new Request() : $request;
+		$this->request = is_null($request) ? new RequestInheritance() : $request;
 
-		$this->response = is_null($response) ? new Response() : $response;
+		$this->response = is_null($response) ? new ResponseInheritance() : $response;
 
 		$this->setUndefinedRoute(new Route('', '', function(RequestInterface $request, ResponseInterface $response){
 			$response->setCode(404)->send("{$request->getMethod()} / 404");
@@ -262,7 +262,7 @@ class Router {
 	/**
 	 * Return all routes in method
 	 *
-	 * @param $method string
+	 * @param $method string|null
 	 *
 	 *
 	 * @return Route[]
@@ -270,7 +270,7 @@ class Router {
 	public function getRoutes(?string $method = null) : array {
 		$method = strtoupper($method);
 
-		return isset($this->routes[$method]) ? $this->routes[$method] : [];
+		return $this->routes[$method] ?? [];
 	}
 
 
@@ -339,7 +339,6 @@ class Router {
 
 		$uri = $this->request->getURI();
 
-		/** @var $routes Route[] */
 		$routes = array_merge($this->getRoutes($method), $this->getRoutes('ANY'));
 
 		$get = $_GET;

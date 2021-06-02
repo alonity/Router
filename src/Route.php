@@ -41,7 +41,7 @@ class Route {
 		$this->handlers = $this->array_key_prefix($handlers, ':');
 	}
 
-	private function array_key_prefix(array $array, string $prefix){
+	private function array_key_prefix(array $array, string $prefix) : array {
 		$newarr = [];
 
 		foreach($array as $k => $v){
