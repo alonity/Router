@@ -379,9 +379,11 @@ class Router {
 
 				$this->request->setParams($this->combineParams(@$matches[1], $params));
 
-				if(is_callable($middle)){
-					$middle = $middle($this->request, $this->response);
-				}
+                if(is_callable($middle)){
+                    $middle = $middle($this->request, $this->response);
+                }elseif(is_array($middle)){
+                    $middle = call_user_func_array($middle, [$this->request, $this->response]);
+                }
 
 				if($middle){
 					$find = true;

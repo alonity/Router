@@ -72,9 +72,27 @@ class RequestInheritance implements RequestInterface {
 		return $this->params[$key] ?? null;
 	}
 
-	public function getMethod() : string {
-		return @$_SERVER['REQUEST_METHOD'];
-	}
+    public function getMethod() : string {
+        return @$_SERVER['REQUEST_METHOD'];
+    }
+
+    public function getIP() : string {
+        if(!empty($_SERVER['HTTP_CF_CONNECTING_IP'])){
+            $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_REAL_IP'])){
+            $ip = $_SERVER['HTTP_X_REAL_IP'];
+        }elseif(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        preg_match("/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/i", $ip, $matches);
+
+        return (isset($matches[0])) ? $matches[0] : $ip;
+    }
 }
 
 ?>

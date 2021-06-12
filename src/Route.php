@@ -54,9 +54,11 @@ class Route {
 	public function execute(RequestInterface $request, ResponseInterface $response){
 		$callback = $this->callback;
 
-		if(is_callable($callback)){
-			$callback($request, $response);
-		}elseif(is_string($callback) || is_int($callback) || is_float($callback)){
+        if(is_callable($callback)){
+            $callback($request, $response);
+        }elseif(is_array($callback)){
+            echo call_user_func_array($callback, [$request, $response]);
+        }elseif(is_string($callback) || is_int($callback) || is_float($callback)){
 			echo $callback;
 		}
 

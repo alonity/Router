@@ -86,12 +86,21 @@ interface RequestInterface {
 
 
 
-	/**
-	 * Get request method
-	 *
-	 * @return string
-	*/
-	public function getMethod() : string;
+    /**
+     * Get request method
+     *
+     * @return string
+     */
+    public function getMethod() : string;
+
+
+
+    /**
+     * Get request IP
+     *
+     * @return string
+     */
+    public function getIP() : string;
 
 
 }
