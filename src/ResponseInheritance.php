@@ -50,5 +50,3 @@ class ResponseInheritance implements ResponseInterface {
 		return $this;
 	}
 }
-
-?>

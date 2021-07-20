@@ -94,5 +94,3 @@ class RequestInheritance implements RequestInterface {
         return (isset($matches[0])) ? $matches[0] : $ip;
     }
 }
-
-?>

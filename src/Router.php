@@ -407,5 +407,3 @@ class Router {
 		return $route->execute($this->request, $this->response);
 	}
 }
-
-?>

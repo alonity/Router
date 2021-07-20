@@ -63,5 +63,3 @@ interface ResponseInterface {
 	 */
 	public function setCode(int $code) : self;
 }
-
-?>

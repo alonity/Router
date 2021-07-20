@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.1
+ * @version 2.0.2
  *
  */
 
@@ -55,7 +55,15 @@ class Route {
 		$callback = $this->callback;
 
         if(is_array($callback)){
-            echo call_user_func_array($callback, [$request, $response]);
+            if(!isset($callback[0]) || !isset($callback[1])){
+                throw new RouteException("Router callback array is not valid");
+            }elseif(!class_exists($callback[0])){
+                throw new RouteException("Class \"{$callback[0]}\" not found");
+            }
+
+            $instance = new $callback[0];
+
+            echo $instance->{$callback[1]}($request, $response);
         }elseif(is_callable($callback)){
             $callback($request, $response);
         }elseif(is_string($callback) || is_int($callback) || is_float($callback)){
@@ -85,5 +93,3 @@ class Route {
 		return $this->handlers;
 	}
 }
-
-?>
