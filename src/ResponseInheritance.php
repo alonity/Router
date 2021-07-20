@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.0
+ * @version 2.0.1
  *
  */
 
@@ -28,6 +28,12 @@ class ResponseInheritance implements ResponseInterface {
 
 		http_response_code($this->code);
 
+		if(!empty($this->headers)){
+		    foreach($this->headers as $header){
+		        header($header);
+            }
+        }
+
 		echo $data;
 	}
 
@@ -38,14 +44,20 @@ class ResponseInheritance implements ResponseInterface {
 	}
 
 	public function setHeaders(array $headers) : ResponseInterface {
-		$this->headers = array_replace_recursive($this->headers, $headers);
+		$this->headers = array_merge($this->headers, $headers);
+
+        $this->headers = array_unique($this->headers);
 
 		return $this;
 	}
 
 	public function setHeader(string $key, $value) : ResponseInterface {
 
-		$this->headers[$key] = $value;
+	    if(in_array($value, $this->headers)){
+	        return $this;
+        }
+
+		$this->headers[] = $value;
 
 		return $this;
 	}
