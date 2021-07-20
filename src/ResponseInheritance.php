@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.1
+ * @version 2.0.2
  *
  */
 
@@ -51,7 +51,7 @@ class ResponseInheritance implements ResponseInterface {
 		return $this;
 	}
 
-	public function setHeader(string $key, $value) : ResponseInterface {
+	public function setHeader(string $value) : ResponseInterface {
 
 	    if(in_array($value, $this->headers)){
 	        return $this;

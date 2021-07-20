@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.0
+ * @version 2.0.2
  *
  */
 
@@ -44,13 +44,11 @@ interface ResponseInterface {
 	/**
 	 * Set single header manually
 	 *
-	 * @param $key string
-	 *
 	 * @param $value mixed
 	 *
 	 * @return self
 	 */
-	public function setHeader(string $key, $value) : self;
+	public function setHeader(string $value) : self;
 
 
 
