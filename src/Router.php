@@ -12,13 +12,19 @@
  *
  * @license MIT
  *
- * @version 2.0.0
+ * @version 2.0.1
  *
  */
 
 namespace alonity\router;
 
 class Router {
+    const RESPONSE_TEXT = 0;
+
+    const RESPONSE_JSON = 1;
+
+    const RESPONSE_XML = 2;
+
 	private $request, $response, $activated;
 
 	/** @var $undefined Route|null */

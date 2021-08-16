@@ -25,8 +25,10 @@ interface ResponseInterface {
 	 * Send response to client
 	 *
 	 * @param $data mixed
+     *
+     * @return self
 	*/
-	public function send($data);
+	public function send($data, int $type = 0) : self;
 
 
 

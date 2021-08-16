@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.2
+ * @version 2.0.3
  *
  */
 
@@ -24,9 +24,20 @@ class ResponseInheritance implements ResponseInterface {
 
 	private $headers = [];
 
-	public function send($data = '') {
+	public function send($data = '', int $type = 0) : ResponseInterface {
 
 		http_response_code($this->code);
+
+		switch ($type){
+            case Router::RESPONSE_JSON:
+                $this->setHeader('Content-Type: application/json');
+                $data = json_encode($data);
+            break;
+
+            case Router::RESPONSE_XML:
+                $this->setHeader('Content-type: text/xml');
+            break;
+        }
 
 		if(!empty($this->headers)){
 		    foreach($this->headers as $header){
@@ -35,7 +46,13 @@ class ResponseInheritance implements ResponseInterface {
         }
 
 		echo $data;
+
+		return $this;
 	}
+
+	public function end(){
+	    exit;
+    }
 
 	public function setCode(int $code) : ResponseInterface {
 		$this->code = $code;
