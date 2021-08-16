@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.0
+ * @version 2.0.1
  *
  */
 
@@ -51,6 +51,10 @@ class RequestInheritance implements RequestInterface {
 	public function getURI() : ?string {
 		return @preg_replace('/^(\/+)?(\?+)?/', '', $_SERVER['REQUEST_URI']);
 	}
+
+    public function getBody() : array {
+        return $_REQUEST;
+    }
 
 	public function setParams(array $params) : RequestInterface {
 		$this->params = array_replace_recursive($this->params, $params);

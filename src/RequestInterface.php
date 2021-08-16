@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.0
+ * @version 2.0.1
  *
  */
 
@@ -39,6 +39,15 @@ interface RequestInterface {
 	 * @return string|null
 	 */
 	public function getURI() : ?string;
+
+
+
+    /**
+     * Get request body
+     *
+     * @return array
+     */
+    public function getBody() : array;
 
 
 
