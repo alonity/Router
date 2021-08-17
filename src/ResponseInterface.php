@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.2
+ * @version 2.0.3
  *
  */
 
@@ -25,10 +25,11 @@ interface ResponseInterface {
 	 * Send response to client
 	 *
 	 * @param $data mixed
+     * @param $type int
      *
      * @return self
 	*/
-	public function send($data, int $type = 0) : self;
+	public function send($data = '', int $type = 0) : self;
 
 
 
@@ -54,12 +55,19 @@ interface ResponseInterface {
 
 
 
-	/**
-	 * Set response code. Default 200
-	 *
-	 * @param $code int
-	 *
-	 * @return self
-	 */
-	public function setCode(int $code) : self;
+    /**
+     * Set response code. Default 200
+     *
+     * @param $code int
+     *
+     * @return self
+     */
+    public function setCode(int $code) : self;
+
+
+
+    /**
+     * End on response
+     */
+    public function end();
 }
