@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.1
+ * @version 2.0.2
  *
  */
 
@@ -20,7 +20,7 @@ namespace alonity\router;
 
 class RequestInheritance implements RequestInterface {
 
-	private $headers;
+	private $headers, $protocol;
 
 	private $params = [];
 
@@ -96,5 +96,23 @@ class RequestInheritance implements RequestInterface {
         preg_match("/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/i", $ip, $matches);
 
         return (isset($matches[0])) ? $matches[0] : $ip;
+    }
+
+    public function setProtocol(string $protocol) : self {
+        $this->protocol = $protocol;
+
+        return $this;
+    }
+
+    public function getProtocol() : string {
+        if(!is_null($this->protocol)){ return $this->protocol; }
+
+        if(isset($_SERVER['HTTPS']) && filter_var($_SERVER['HTTPS'], FILTER_VALIDATE_BOOLEAN)){ $this->setProtocol('https'); return 'https'; }
+
+        if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https'){ $this->setProtocol('https'); return 'https'; }
+
+        $this->setProtocol('http');
+
+        return 'http';
     }
 }
