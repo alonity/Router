@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.2
+ * @version 2.0.1
  *
  */
 
@@ -110,26 +110,6 @@ interface RequestInterface {
      * @return string
      */
     public function getIP() : string;
-
-
-
-    /**
-     * Set request protocol
-     *
-     * @param $protocol string
-     *
-     * @return self
-     */
-    public function setProtocol(string $protocol) : self;
-
-
-
-    /**
-     * Get request protocol
-     *
-     * @return string
-     */
-    public function getProtocol() : string;
 
 
 }
