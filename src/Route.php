@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.1.0
+ * @version 2.0.2
  *
  */
 
@@ -29,11 +29,7 @@ class Route {
 
 	private $handlers = [];
 
-	private $childs = [];
-
-	private $parent;
-
-	public function __construct(string $method = 'GET', string $uri = '', $callback = null, $middleware = true, array $handlers = [], array $childs = []){
+	public function __construct(string $method = 'GET', string $uri = '', $callback = null, $middleware = true, array $handlers = []){
 		$this->method = $method;
 
 		$this->uri = $uri;
@@ -43,8 +39,6 @@ class Route {
 		$this->middleware = $middleware;
 
 		$this->handlers = $this->array_key_prefix($handlers, ':');
-
-		$this->childs = $childs;
 	}
 
 	private function array_key_prefix(array $array, string $prefix) : array {
@@ -95,21 +89,7 @@ class Route {
 		return $this->middleware;
 	}
 
-    public function getHandlers() : array {
-        return $this->handlers;
-    }
-
-    public function getChilds() : array {
-        return $this->childs;
-    }
-
-    public function setParent(Route $route) : self {
-        $this->parent = $route;
-
-        return $this;
-    }
-
-    public function getParent() : ?Route {
-        return $this->parent;
-    }
+	public function getHandlers(){
+		return $this->handlers;
+	}
 }
