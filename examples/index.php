@@ -10,8 +10,8 @@ error_reporting(E_ALL);
 
 require_once('../src/ResponseInterface.php');
 require_once('../src/RequestInterface.php');
-require_once('../src/Request.php');
-require_once('../src/Response.php');
+require_once('../src/RequestInheritance.php');
+require_once('../src/ResponseInheritance.php');
 require_once('../src/Route.php');
 require_once('../src/Router.php');
 
