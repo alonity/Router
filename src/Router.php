@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.0.1
+ * @version 2.1.0
  *
  */
 
@@ -55,10 +55,10 @@ class Router {
 		$this->activated = $this->undefined;
 	}
 
-	private function method(string $method, string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
+	private function method(string $method, string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
 		$method = strtoupper($method);
 
-		$this->routes[$method][] = new Route($method, $uri, $callback, $middleware, $handlers);
+		$this->routes[$method][] = new Route($method, $uri, $callback, $middleware, $handlers, $childs);
 
 		return $this;
 	}
@@ -75,12 +75,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function get(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function get(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -95,12 +97,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function post(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function post(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -115,12 +119,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function put(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function put(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -135,12 +141,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function head(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function head(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -155,12 +163,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function patch(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function patch(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -175,12 +185,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function delete(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function delete(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -195,12 +207,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function connect(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function connect(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -215,12 +229,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function trace(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function trace(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -235,12 +251,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function options(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function options(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -255,12 +273,14 @@ class Router {
 	 * @param $middleware mixed
 	 *
 	 * @param $handlers array
+     *
+     * @param $childs array
 	 *
 	 *
 	 * @return self
 	 */
-	public function any(string $uri, $callback = null, $middleware = true, array $handlers = []) : self {
-		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers);
+	public function any(string $uri, $callback = null, $middleware = true, array $handlers = [], array $childs = []) : self {
+		return $this->method(__FUNCTION__, $uri, $callback, $middleware, $handlers, $childs);
 	}
 
 
@@ -335,6 +355,109 @@ class Router {
 		return $res;
 	}
 
+	private function searchRoute(Route $route) : ?Route {
+
+        $uri = $this->request->getURI();
+
+        $pattern = addcslashes($route->getURI(), '.\\+?[]^$(){}=!<>|-#/');
+
+        preg_match_all('/\:([a-z0-9_]+)/i', $route->getURI(), $matches);
+
+        $pattern = str_replace('*', '(.*)?', $pattern);
+
+        if(!empty($matches) && isset($matches[1]) && !empty($matches[1])){
+
+            $handlers = $route->getHandlers();
+
+            if(!empty($handlers)){
+                $pattern = strtr($pattern, $handlers);
+            }
+
+            $pattern = str_replace($matches[0], '([a-zA-Z0-9\-_]+)', $pattern);
+        }
+
+        $isChilds = !empty($route->getChilds());
+
+        if(preg_match("/^{$pattern}\/?$/i", $uri, $params)){
+
+            $middle = $route->getMiddleware();
+
+            $this->request->setParams($this->combineParams(@$matches[1], $params));
+
+            if(is_callable($middle)){
+                $middle = $middle($this->request, $this->response);
+            }elseif(is_array($middle)){
+                $middle = call_user_func_array($middle, [$this->request, $this->response]);
+            }
+
+            if($middle && !is_null($route->getCallback())){
+                return $route;
+            }
+        }
+
+        if($isChilds && preg_match("/^{$pattern}\/?/i", $uri, $params)){
+            $search = $this->childs($route);
+
+            if(!is_null($search)){
+                return $search;
+            }
+        }
+
+        return null;
+    }
+
+
+	private function childs(Route $parent) : ?Route {
+
+        $find = null;
+
+        foreach($parent->getChilds() as $child){
+            // string $uri = '', $callback = null, $middleware = true, array $handlers = [], array $childs = []
+
+            $method = $parent->getMethod();
+
+            $uri = $parent->getURI();
+
+            $callback = null;
+
+            $middleware = true;
+
+            $handlers = [];
+
+            $childList = [];
+
+            if(isset($child[0])){
+                $method = $child[0];
+            }
+
+            if(isset($child[1])){
+                $uri .= "/{$child[1]}";
+            }
+
+            if(isset($child[2])){
+                $callback = $child[2];
+            }
+
+            if(isset($child[3])){
+                $middleware = $child[3];
+            }
+
+            if(isset($child[4])){
+                $handlers = $child[4];
+            }
+
+            if(isset($child[5])){
+                $childList = $child[5];
+            }
+
+            $route = new Route(strtoupper($method), $uri, $callback, $middleware, $handlers, $childList);
+
+            $find = $this->searchRoute($route);
+        }
+
+        return $find;
+    }
+
 
 
 	/**
@@ -342,8 +465,6 @@ class Router {
 	*/
 	public function execute(){
 		$method = $this->request->getMethod();
-
-		$uri = $this->request->getURI();
 
 		$routes = array_merge($this->getRoutes($method), $this->getRoutes('ANY'));
 
@@ -362,40 +483,16 @@ class Router {
 		$params = $matches = [];
 
 		foreach($routes as $route){
-			$pattern = addcslashes($route->getURI(), '.\\+?[]^$(){}=!<>|-#/');
 
-			preg_match_all('/\:([a-z0-9_]+)/i', $route->getURI(), $matches);
+            $search = $this->searchRoute($route);
 
-			$pattern = str_replace('*', '(.*)?', $pattern);
+            if(!is_null($search)){
+                preg_match_all('/\:([a-z0-9_]+)/i', $search->getURI(), $matches);
 
-			if(!empty($matches) && isset($matches[1]) && !empty($matches[1])){
+                $find = true;
 
-				$handlers = $route->getHandlers();
-
-				if(!empty($handlers)){
-					$pattern = strtr($pattern, $handlers);
-				}
-
-				$pattern = str_replace($matches[0], '([a-zA-Z0-9\-_]+)', $pattern);
-			}
-
-			if(preg_match("/^{$pattern}\/?$/i", $uri, $params)){
-
-				$middle = $route->getMiddleware();
-
-				$this->request->setParams($this->combineParams(@$matches[1], $params));
-
-                if(is_callable($middle)){
-                    $middle = $middle($this->request, $this->response);
-                }elseif(is_array($middle)){
-                    $middle = call_user_func_array($middle, [$this->request, $this->response]);
-                }
-
-				if($middle){
-					$find = true;
-					$this->activated = $route; break;
-				}
-			}
+                $this->activated = $search; break;
+            }
 		}
 
 		if(!empty($matches) && isset($matches[1]) && !empty($matches[1]) && !empty($params)){
