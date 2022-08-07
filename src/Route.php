@@ -6,13 +6,13 @@
  *
  * @author Qexy admin@qexy.org
  *
- * @copyright © 2021 Alonity
+ * @copyright © 2022 Alonity
  *
  * @package alonity\router
  *
  * @license MIT
  *
- * @version 2.1.0
+ * @version 2.1.1
  *
  */
 
@@ -42,19 +42,9 @@ class Route {
 
 		$this->middleware = $middleware;
 
-		$this->handlers = $this->array_key_prefix($handlers, ':');
+		$this->handlers = $handlers;
 
 		$this->childs = $childs;
-	}
-
-	private function array_key_prefix(array $array, string $prefix) : array {
-		$newarr = [];
-
-		foreach($array as $k => $v){
-			$newarr[$prefix.$k] = "({$v})";
-		}
-
-		return $newarr;
 	}
 
 	public function execute(RequestInterface $request, ResponseInterface $response){

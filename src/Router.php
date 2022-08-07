@@ -6,13 +6,13 @@
  *
  * @author Qexy admin@qexy.org
  *
- * @copyright © 2021 Alonity
+ * @copyright © 2022 Alonity
  *
  * @package alonity\router
  *
  * @license MIT
  *
- * @version 2.1.0
+ * @version 2.1.1
  *
  */
 
@@ -355,6 +355,16 @@ class Router {
 		return $res;
 	}
 
+    private function array_key_prefix(array $array, string $prefix) : array {
+        $newarr = [];
+
+        foreach($array as $k => $v){
+            $newarr[$prefix.$k] = "({$v})";
+        }
+
+        return $newarr;
+    }
+
 	private function searchRoute(Route $route) : ?Route {
 
         $uri = $this->request->getURI();
@@ -367,7 +377,7 @@ class Router {
 
         if(!empty($matches) && isset($matches[1]) && !empty($matches[1])){
 
-            $handlers = $route->getHandlers();
+            $handlers = $this->array_key_prefix($route->getHandlers(), ':');
 
             if(!empty($handlers)){
                 $pattern = strtr($pattern, $handlers);
@@ -508,6 +518,12 @@ class Router {
 		}
 
 		$route = $find ? $this->activated : $this->undefined;
+
+		foreach($route->getHandlers() as $k => $v){
+		    if(is_null($this->request->getParam($k))){
+                $this->request->setParam($k, $v);
+            }
+        }
 
 		return $route->execute($this->request, $this->response);
 	}
