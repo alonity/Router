@@ -6,13 +6,13 @@
  *
  * @author Qexy admin@qexy.org
  *
- * @copyright © 2021 Alonity
+ * @copyright © 2022 Alonity
  *
  * @package alonity\router
  *
  * @license MIT
  *
- * @version 2.0.2
+ * @version 2.0.3
  *
  */
 
@@ -49,7 +49,7 @@ class RequestInheritance implements RequestInterface {
 	}
 
 	public function getURI() : ?string {
-		return @preg_replace('/^(\/+)?(\?+)?/', '', $_SERVER['REQUEST_URI']);
+		return @preg_replace('/^(\/+)?(\?+)?/', '', ltrim($_SERVER['REQUEST_URI'], '/'));
 	}
 
     public function getBody() : array {

@@ -12,7 +12,7 @@
  *
  * @license MIT
  *
- * @version 2.1.1
+ * @version 2.1.2
  *
  */
 
@@ -36,7 +36,7 @@ class Route {
 	public function __construct(string $method = 'GET', string $uri = '', $callback = null, $middleware = true, array $handlers = [], array $childs = []){
 		$this->method = $method;
 
-		$this->uri = $uri;
+		$this->uri = ltrim($uri, '/');
 
 		$this->callback = $callback;
 
